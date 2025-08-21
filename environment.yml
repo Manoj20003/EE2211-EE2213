@@ -1,0 +1,10 @@
+name: ee2211-2213
+channels:
+  - defaults
+dependencies:
+  - numpy
+  - matplotlib
+  - pandas
+  - scikit-learn
+  - python=3.11
+prefix: /opt/conda/envs/ee2211-2213
