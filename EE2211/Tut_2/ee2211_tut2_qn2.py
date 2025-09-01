@@ -1,12 +1,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt 
-from matplotlib.ticker import MaxNLocator
 
 
 def plot_data(file_path):
     df = pd.read_csv(file_path)
 
-    df["year"] = df["year"].round().astype(int)
+
     df.set_index("year", inplace=True)
 
     
