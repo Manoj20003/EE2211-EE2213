@@ -30,6 +30,12 @@ def A2_A0307665X(road_map, city_coordinates, start_city, destination_city):
     # Hint 2: You will need a priority queue (e.g., min-heap) to explore cities in order of their f = g + h values.
     # You can use heapq.heappush() and heapq.heappop() for priority queue operations.
 
+    # Heuristic function: Euclidean distance between two cities
+    def heuristic(city1, city2):
+        coord1 = np.array(city_coordinates[city1])
+        coord2 = np.array(city_coordinates[city2])
+        return np.linalg.norm(coord1 - coord2)  
+
     # Initialize the data structures here
     node_data = {city:{'dist': np.inf, 'prev': []} for city in road_map}
     node_data[start_city]['dist'] = 0
@@ -66,11 +72,7 @@ def A2_A0307665X(road_map, city_coordinates, start_city, destination_city):
         
 
 
-    # Heuristic function: Euclidean distance between two cities
-    def heuristic(city1, city2):
-        coord1 = np.array(city_coordinates[city1])
-        coord2 = np.array(city_coordinates[city2])
-        return np.linalg.norm(coord1 - coord2)  
+
 
     # If no path is found, return None and np.inf
     # (Do not change or modify this line.)
