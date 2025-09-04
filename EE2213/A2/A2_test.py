@@ -27,10 +27,6 @@ except Exception as e:
     print("Please check the implementation of the function.")
 
 
-
-
-
-
 ## Expected output:
 # Shortest Path: ['A', 'B', 'C', 'D']
-# Total Cost: 6.63
+# Total Cost: 4.0

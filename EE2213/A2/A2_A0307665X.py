@@ -38,7 +38,7 @@ def A2_A0307665X(road_map, city_coordinates, start_city, destination_city):
 
     # Initialize the data structures here
     node_data = {city:{'dist': np.inf, 'prev': []} for city in road_map}
-    node_data[start_city]['dist'] = 0
+    node_data[start_city]['dist'] = 0.0
     visited = set()
 
     priority_queue = []
@@ -60,17 +60,25 @@ def A2_A0307665X(road_map, city_coordinates, start_city, destination_city):
             visited.add(city)
         
         for neighbour, cost in road_map[city].items():
-            if city in visited:
+            if neighbour in visited:
                 continue
+
             tentative_g = node_data[city]['dist'] + cost
 
             if tentative_g < node_data[neighbour]['dist']:
                 node_data[neighbour]['dist'] = tentative_g
                 node_data[neighbour]['prev'] = city
-                heapq.heappush(priority_queue, (tentative_g + heuristic(neighbour, destination_city), neighbour))
 
-        
+                if neighbour in [item[1] for item in priority_queue]:
+                    for index, (f_val, x) in enumerate(priority_queue):
+                        if x == neighbour:
+                            priority_queue[index] = (tentative_g + heuristic(neighbour, destination_city), neighbour)
+                            heapq.heapify(priority_queue)
+                            break
+                else:
+                    heapq.heappush(priority_queue, (tentative_g + heuristic(neighbour, destination_city), neighbour))
 
+                
 
 
 
