@@ -26,14 +26,12 @@ def A1_A0307665X(x, y):
     euclidean_dist = np.sqrt(np.sum(diff ** 2))
     manhattan_dist = np.sum(np.abs(diff))
 
-    euclidean_dist = np.round(euclidean_dist, 2)
-    manhattan_dist = np.round(manhattan_dist, 2)
+    euclidean_dist = np.array([np.round(euclidean_dist, 2)])
+    manhattan_dist = np.array([np.round(manhattan_dist, 2)])
+
 
     # return in this order
     return euclidean_dist, manhattan_dist
 
 
-x = np.array([1, 2, 5])
-y = np.array([7, 0, 3])
-A1_A0307665X(x, y)
 
