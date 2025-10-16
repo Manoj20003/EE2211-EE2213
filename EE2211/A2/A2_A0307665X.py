@@ -23,7 +23,7 @@ def A2_A0307665X(N):
     :error_test_array type: numpy.ndarray
     """
     # your code goes here
-    X_train, X_test, y_train, y_test = train_test_split(load_iris().data, load_iris().target, test_size=0.6, random_state=N, stratify=load_iris().target)
+    X_train, X_test, y_train, y_test = train_test_split(load_iris().data, load_iris().target, test_size=0.6, random_state=N)
 
     encoder = OneHotEncoder(sparse_output=False)
     Ytr = encoder.fit_transform(y_train.reshape(-1, 1))
@@ -36,34 +36,33 @@ def A2_A0307665X(N):
     lambda_ = 0.0001
 
     for degree in range(1, 11):
-        pf = PolynomialFeatures(degree=degree, include_bias=True)
-        Phi_tr = pf.fit_transform(X_train)
-        Phi_te = pf.transform(X_test)
+        pf = PolynomialFeatures(degree=degree)
+        P_tr = pf.fit_transform(X_train)
+        P_te = pf.transform(X_test)
 
-        Ptrain_list.append(Phi_tr)
-        Ptest_list.append(Phi_te)
+        Ptrain_list.append(P_tr)
+        Ptest_list.append(P_te)
 
-        n_tr, p = Phi_tr.shape
+        n_tr, p = P_tr.shape
 
 
         if n_tr > p:
-            XtX = Phi_tr.T @ Phi_tr
-            W = np.linalg.inv(XtX + lambda_ * np.eye(p)) @ (Phi_tr.T @ Ytr)
+            XtX = P_tr.T @ P_tr
+            W = np.linalg.inv(XtX + lambda_ * np.eye(p)) @ (P_tr.T @ Ytr)
         else:
-            K = Phi_tr @ Phi_tr.T
-            W = Phi_tr.T @ (np.linalg.inv(K + lambda_ * np.eye(n_tr)) @ Ytr)
+            K = P_tr @ P_tr.T
+            W = P_tr.T @ (np.linalg.inv(K + lambda_ * np.eye(n_tr)) @ Ytr)
 
         w_list.append(W)
 
-        train_pred = np.argmax(Phi_tr @ W, axis=1)
-        test_pred = np.argmax(Phi_te @ W, axis=1)
+        train_pred = np.argmax(P_tr @ W, axis=1)
+        test_pred = np.argmax(P_te @ W, axis=1)
 
-        # errors = misclassified counts
         error_train_array[degree - 1] = int(np.sum(train_pred != y_train))
         error_test_array[degree - 1] = int(np.sum(test_pred != y_test))
 
     # return in this order
+    
     return X_train, y_train, X_test, y_test, Ytr, Yts, Ptrain_list, Ptest_list, w_list, error_train_array, error_test_array
-
 
 
