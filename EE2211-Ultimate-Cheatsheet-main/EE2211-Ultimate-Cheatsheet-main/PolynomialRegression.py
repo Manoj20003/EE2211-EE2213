@@ -71,9 +71,9 @@ def polynomial_regression(X,y,order,X_test, y_test, reg_lambda = 0):
     # result=np.hstack((P,y))
     # print("P|y rank: ", np.linalg.matrix_rank(result))
 
-x = np.array([-10,-8,-3,-1,2,7]).reshape(-1, 1)
-y = np.array([4.18,2.42,0.22,0.12,0.25,3.09]).reshape(-1, 1)
-X_test = np.array([-9,-7,-5,-4,-2,1,4,5,6,9]).reshape(-1, 1)
+x = np.array([[3, 15, 50] , [5, 12, 68], [2, 9, 60], [4, 19, 80] ]).reshape(-1, 3)
+y = np.array([5.0, 6.0, 3.0, 8.0]).reshape(-1, 1)
+X_test = np.array([[7,10,70]]).reshape(-1, 3)
 order = 1
 y_test = np.array([3, 1.81, 0.8, 0.25, -0.19, 0.4, 1.24, 1.68, 2.32, 5.05]).reshape(-1, 1)
 polynomial_regression(x,y,order,X_test, y_test)

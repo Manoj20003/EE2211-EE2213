@@ -1,6 +1,6 @@
 import numpy as np
 
-def gradient_descent_scalar(gradient, w0, lr=0.1, steps=20):
+def gradient_descent_scalar(gradient, w0, lr=0.01, steps=5):
     """
     gradient: function that returns dC/dw at a given w
     w0: initial value
@@ -23,9 +23,10 @@ def gradient_descent_scalar(gradient, w0, lr=0.1, steps=20):
 # dC/dw = sin(2w)
 # ------------------------
 
-grad = lambda w: np.sin(2*w)
+# grad = lambda w: np.sin(2*w)
+grad = lambda w: 2 * (w + 2)
 
-result = gradient_descent_scalar(grad, w0=3.0, lr=0.1, steps=10)
+result = gradient_descent_scalar(grad, w0=4.0, lr=0.01, steps=5)
 
 for step, w, g in result:
     print(f"step {step:2d}: w = {w:.6f}, gradient = {g:.6f}")
@@ -69,8 +70,8 @@ w0 = np.array([3.0, 2.0])
 
 result = gradient_descent_vector(grad, w0, lr=0.2, steps=5)
 
-for step, w, g in result:
-    print(f"step {step:2d}: w = {w}, gradient = {g}")
+# for step, w, g in result:
+#     print(f"step {step:2d}: w = {w}, gradient = {g}")
 
 
 
@@ -108,5 +109,5 @@ initial = [3.0, 2.0]
 
 res = auto_gradient_descent(C, [x, y], initial, lr=0.2, steps=5)
 
-for step, w, grad in res:
-    print(f"step {step:2d}: w = {w}, grad = {grad}")
+# for step, w, grad in res:
+#     print(f"step {step:2d}: w = {w}, grad = {grad}")
