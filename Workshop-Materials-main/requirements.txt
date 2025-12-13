@@ -1,0 +1,25 @@
+# Core Qiskit packages for quantum computing
+qiskit>=0.45
+qiskit-aer>=0.13.0
+qiskit-algorithms>=0.2.0
+qiskit-optimization>=0.6.0
+qiskit-finance>=0.4.0
+
+# Scientific computing
+numpy>=1.17
+scipy>=1.4
+
+# Data handling
+pandas>=1.0.0
+
+# Visualization
+matplotlib>=3.0.0
+seaborn>=0.11.0
+
+# Additional dependencies (installed by qiskit-finance)
+psutil>=5
+fastdtw>=0.3.0
+yfinance>=0.1.70
+nasdaq-data-link>=1.0.0
+certifi>=2020.0.0
+
